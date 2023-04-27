@@ -73,7 +73,7 @@ this.setState((state)=>({
     > 
     <h1 className="title">Phonebook</h1>
 
-    <ContactForm onSubmit={this.formSubmitHandler}/>
+    <ContactForm onSubmitHandler={this.formSubmitHandler}/>
      
     <h2 className="title">Contacts</h2>
        

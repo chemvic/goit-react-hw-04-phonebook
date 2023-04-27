@@ -1,45 +1,51 @@
-import React,{Component} from 'react';
+import {useState} from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import css from "./ContactForm.module.css";
 
 
-class ContactForm extends Component{
+const ContactForm =(props)=>{
+const[name,setName]=useState('');
+const[number,setNumber]=useState('');
 
-state={
-    name: '',
-    number: '',
-}
 
-handleInputChange=({ target: { name, value } }) => {
-    this.setState({
-        [name]: value,
-    });
+const handleInputChange=({ target: { name, value } }) => {
+  
+    switch(name){
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        return;
+    }
 };
 
 
-handleSubmit = (event) => {   
+const handleSubmit = (event) => {   
 		  event.preventDefault();     
-      this.reset();
-
+     
       const newContact={
-        ...this.state,
+        name,
+        number,
         id: nanoid()
       } 
-      this.props.onSubmit(newContact);
+
+      props.onSubmitHandler(newContact);
+       reset();
 }
 
-reset=()=>{
-this.setState({  name: '',
-number: ''});
+const reset=()=>{
+setName('');
+setNumber('');
 }
-
-render(){
-  const {name, number} = this.state;
+ 
     return (
   <div> 
  
-    <form className={css.form} onSubmit={this.handleSubmit}>
+    <form className={css.form} onSubmit={handleSubmit}>
        <label className={css.form_lable}>
        <span>Name</span>
        <input className={css.form_input}
@@ -47,7 +53,7 @@ type="text"
 name="name"
 value={name}
 id= {123}
-onChange={this.handleInputChange}
+onChange={handleInputChange}
 placeholder='Enter name...'
 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
 title="Name may contain only letters,
@@ -62,7 +68,7 @@ required
 type="tel"
 name="number"
 value={number}
-onChange={this.handleInputChange}
+onChange={handleInputChange}
 placeholder='Enter phone number...'
 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -76,10 +82,10 @@ required
   </div>
 );
 }
-}
+
 
 ContactForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired
+  onSubmitHandler: PropTypes.func.isRequired
   }
 
 export default ContactForm;
