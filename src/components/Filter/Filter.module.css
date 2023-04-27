@@ -1,0 +1,12 @@
+.filter_lable {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+  }
+  
+  .filter_input {
+   width: 300px;
+  }
+  .filter_lable span {
+    margin-bottom: 4px;
+  }
