@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import css from "./ContactForm.module.css";
 
 
-const ContactForm =(props)=>{
+const ContactForm =({onSubmitHandler})=>{
 const[name,setName]=useState('');
 const[number,setNumber]=useState('');
 
@@ -33,7 +33,7 @@ const handleSubmit = (event) => {
         id: nanoid()
       } 
 
-      props.onSubmitHandler(newContact);
+      onSubmitHandler(newContact);
        reset();
 }
 
